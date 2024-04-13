@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import UserButton from './username/userbutton';
+import MessageBox from './sendmessage/sendmessage';
+import DisplayMessage from './displaymessages/displaymessages';
 import './assets/baskic8.css'
 import './App.css';
-import MessageBox from './sendmessage/sendmessage';
-
 function App() {
   // This is just an example of how you would access an API endpoint
   // DO NOT actually access them all in app, it should be accessed within a react component this is just an example
@@ -23,6 +23,7 @@ function App() {
     // We will be putting all our react components here
     <div>
       <UserButton />
+      <DisplayMessage />
       <MessageBox />
     </div>
   );
