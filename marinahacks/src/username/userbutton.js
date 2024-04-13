@@ -1,36 +1,42 @@
-import {
-    useState
-} from "react";
+import { useState, useEffect } from "react";
+
+
 function UserButton() {
     const [textInput, setTextInput] = useState('');
-
+    const [username, setUsername] = useState('')
     // Event handler to update the text input state
     const handleInputChange = (event) => {
         setTextInput(event.target.value);
     };
 
     // Event handler to save the text input
-    const sendUsername = () => {
-        const username = textInput
-        fetch("/submit-username", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username }),
-        })
+    const saveUsername = () => {
+        if (textInput === '') {
+            console.log('Empty username!');
+            setUsername('Unnamed User');
+        }
+        else {
+            setUsername(textInput);
+        }
+        sessionStorage.setItem('username', username);
+
     };
+
+    useEffect(() => {
+        sessionStorage.setItem('username', username);
+    }, [username]);
 
     return (
         <div>
             <input
                 type="text"
+                maxLength={20}
                 value={textInput}
                 onChange={handleInputChange}
                 placeholder="Enter text here"
             />
-            <button onClick={sendUsername}>Send to db</button>
-            <p>Your username: {textInput}</p>
+            <button onClick={saveUsername}>Save!</button>
+            <p>Your username: {username}</p>
         </div>
     );
 }
