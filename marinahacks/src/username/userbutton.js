@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 function UserButton() {
     const [textInput, setTextInput] = useState('');
-    const [username, setUsername] = useState('')
+    const [username, setUsername] = useState(localStorage.getItem('username'))
     // Event handler to update the text input state
     const handleInputChange = (event) => {
         setTextInput(event.target.value);
@@ -18,12 +18,12 @@ function UserButton() {
         else {
             setUsername(textInput);
         }
-        sessionStorage.setItem('username', username);
+        localStorage.setItem('username', username);
 
     };
 
     useEffect(() => {
-        sessionStorage.setItem('username', username);
+        localStorage.setItem('username', username);
     }, [username]);
 
     return (
