@@ -17,17 +17,25 @@ function App() {
     // We will be putting all our react components here
     <Router>
       <Switch>
+        
         <Route exact path='/'>
-          <ChatRoom />
+          <UserButton />
         </Route>
+
+        <Route exact path='/color'>
+         <ColorSelector/>
+        </Route>
+
+        <Route exact path='/join'>
+             <ChatRoom />
+        </Route>
+
         <Route exact path='/chat'>
           <DisplayMessage />
           <MessageBox />
           <MainUserSection/>
         </Route>
-        <Route exact path='/name'>
-          <UserButton />
-        </Route>
+        
       </Switch>
     </Router>
 

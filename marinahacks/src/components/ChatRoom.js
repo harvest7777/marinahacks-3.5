@@ -20,6 +20,7 @@ function ChatRoom() {
   const handleJoin = () => {
     if (selectedRoom) {
       // Redirect to the chatroom page, replace "#" with your actual routing logic or path
+      //window.location.href = `/#${selectedRoom}`;
       window.location.href = `/#${selectedRoom}`;
     } else {
       alert('Please select a chat room first!');
@@ -41,8 +42,19 @@ function ChatRoom() {
       <div className="page-foot">
         <div className="join-goback">
           {/* Assuming the Button component can take an onClick prop */}
-          <Button text="Back" onClick={() => { /* Add your back logic here */ }} />
-          <Button text="Join" onClick={handleJoin} />
+
+          <div className="btn-container-out">
+        <a href="/color" className="btn-container-in">
+          <h1 className="btn-text">Back</h1>
+        </a>
+       </div>
+
+       <div className="btn-container-out">
+        <a href="/chat" className="btn-container-in">
+          <h1 className="btn-text">Join</h1>
+        </a>
+       </div>
+       
         </div>
       </div>
     </>

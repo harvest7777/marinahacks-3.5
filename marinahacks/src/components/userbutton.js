@@ -29,7 +29,15 @@ function UserButton() {
     }, [username]);
 
     return (
-        <div>
+        <>
+        <div className = "page-head">
+          <h1>Select your username.</h1>
+    
+        </div>
+    
+        <div className = 'container-region'>
+            <div className = 'name-selection'>
+            <div>
             <input
                 type="text"
                 maxLength={20}
@@ -37,13 +45,41 @@ function UserButton() {
                 onChange={handleInputChange}
                 placeholder="Enter text here"
             />
-            <button onClick={saveUsername}>Save!</button>
-            <a href="/chat">
-                <button onClick={saveUsername}>Go to chat!</button>
-            </a>
 
         </div>
-    );
+            </div>
+    
+       
+            <div className="btn-container-out">
+            <div className="btn-container-in" onClick={saveUsername} role="button" tabIndex="0" style={{cursor: 'pointer'}}>
+  <h1 className="btn-text">Save</h1>
+</div>
+
+           </div>
+    
+            </div>
+   
+    
+        <div className = "page-foot">
+          <div className="join-goback">
+          
+          <div className="btn-container-out">
+            <a href="/" className="btn-container-in">
+              <h1 className="btn-text">Cancel</h1>
+            </a>
+           </div>
+    
+           <div className="btn-container-out">
+            <a href="/color" className="btn-container-in">
+              <h1 className="btn-text">Confirm</h1>
+            </a>
+           </div>
+    
+    
+          </div>
+        </div>
+        </>
+      )
 }
 
 
