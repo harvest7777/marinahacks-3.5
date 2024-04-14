@@ -6,12 +6,10 @@ function DisplayMessage() {
     const [userCount, setUserCount] = useState(0);
 
     useEffect(() => {
-        // Establish connectino w websocket
         const socket = io('http://localhost:5000');
         socket.on('connect', () => {
             console.log('Connected to server');
         });
-
 
         socket.on('user_count', ({ count }) => {
             setUserCount(count);
@@ -22,30 +20,33 @@ function DisplayMessage() {
         });
 
         socket.on('disconnected_user', () => {
-            const leave_message = "A user has left!"
+            const leave_message = "A user has left!";
             setMessages(prevMessages => [...prevMessages, leave_message]);
-        })
+        });
 
         socket.on('connected_user', () => {
-            const join_message = "A user has joined!"
+            const join_message = "A user has joined!";
             setMessages(prevMessages => [...prevMessages, join_message]);
-        })
+        });
 
         return () => {
-
             socket.disconnect();
         };
     }, []);
-
 
     return (
         <div>
             <h2>Messages</h2>
             <h2>Online: {userCount}</h2>
             <ul>
-                {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
-                ))}
+                {messages.map((message, index) => {
+                    message = message.split(': ')[1];
+                    if(!message){return;}
+                    if(message[4] == ':'){
+                        return <img style={{width:'50px'}} key={index} src={message}></img>;
+                    }
+                    return <li key={index}>{message}</li>;
+                })}
             </ul>
         </div>
     );
