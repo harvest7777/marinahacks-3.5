@@ -29,8 +29,20 @@ const ColorSelector = () => {
 
     <div className = "page-foot">
       <div className="join-goback">
-        <Button text = "Cancel" /> 
-        <Button text = "Confirm" /> 
+      
+      <div className="btn-container-out">
+        <a href="/" className="btn-container-in">
+          <h1 className="btn-text">Cancel</h1>
+        </a>
+       </div>
+
+       <div className="btn-container-out">
+        <a href="/join" className="btn-container-in">
+          <h1 className="btn-text">Confirm</h1>
+        </a>
+       </div>
+
+
       </div>
     </div>
     </>
