@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
-function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool, doClear, handleDoClear }) {
+function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool, doClear, handleDoClear, doSetLastImage, handleSetLastImage}) {
     const canvasRef = useRef(null)
     const [canDraw, setDrawState] = useState(false);
 
@@ -18,6 +18,10 @@ function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool, 
         if(doClear){
           context.clearRect(0, 0, canvas.width, canvas.height);
           handleDoClear(false)
+        }
+        if(doSetLastImage){
+          //context.drawImage(,0,0)
+          handleSetLastImage(false)
         }
         
         context.lineWidth = currentBrushSize;

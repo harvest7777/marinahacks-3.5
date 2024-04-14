@@ -6,8 +6,9 @@ import brushLarge from '../assets/brush_large.png';
 import brushMedium from '../assets/brush_medium.png';
 import brushSmall from '../assets/brush_small.png';
 import clearCard from '../assets/clean.png';
+import lastImage from '../assets/upload.png';
 
-function Tools({ tool, brushSize, handleDoClear }) {
+function Tools({ tool, brushSize, handleDoClear, handleSetLastImage }) {
   return (
     <>
       <input src={eraser} onClick={() => tool(1)} type='image' alt='eraser' />
@@ -16,6 +17,7 @@ function Tools({ tool, brushSize, handleDoClear }) {
       <input src={brushMedium} onClick={() => brushSize(5)} type='image' alt='medium brush' />
       <input src={brushSmall} onClick={() => brushSize(1)} type='image' alt='small brush' />
       <input src={clearCard} onClick={() => handleDoClear(true)} type='image' alt='clear card' />
+      <input src={lastImage} onClick={() => handleSetLastImage(true)} type='image' alt='clear card' />
     </>
   )
 }
