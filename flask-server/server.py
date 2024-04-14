@@ -1,90 +1,68 @@
 from flask import Flask, request, jsonify
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, join_room, leave_room
 
-# This initializes your sql app. This class is used to send sql queries to the databse
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
-chat_history = []
+chat_history = {}  # Dictionary to store messages by room
 connected_clients = 0
-# This is the default api endpoint (https://localhost/)
 
-
-@app.route("/")
-def home():
-    # JSON data returned from endpoint
-    return {0: "no data to be seen here!"}
-
-
-# This is the testing endpoint to make sure the sql queries are being sent (https://localhost/test)
-@app.route("/test")
-def test():
-    return {1: "hello world"}
-
-
-@app.route("/submit-username", methods=["GET", "POST"])
-def submit_username():
-    return "This is supposed to be used through a react component to submit a username"
-
-
-@app.route("/send-message", methods=["GET", "POST"])
+@app.route("/send-message", methods=["POST"])
 def send_message():
-    if request.method == "POST":
-        data = request.json
-        timestamp = data.get('timestamp')
-        username = data.get('username')
-        message = data.get('message')
-        chat_message_string = f"{timestamp} - {username}: {message}"
-        chat_history.append(chat_message_string)
-    socketio.emit('new_message', {
-                  'message': chat_message_string})
-    return "This is supposed to be used through a react component to submit a username"
+    data = request.json
+    room = data.get('room')
+    username = data.get('username')
+    message = data.get('message')
+    timestamp = data.get('timestamp')
+    chat_message_string = f"{timestamp} - {username}: {message}"
+    
+    # Storing message in room-specific history
+    if room not in chat_history:
+        chat_history[room] = []
+    chat_history[room].append(chat_message_string)
+    
+    socketio.emit('new_message', {'message': chat_message_string}, room=room)
+    return jsonify(success=True)
 
-
-@app.route("/join", methods=["GET", "POST"])
+@app.route("/join", methods=["POST"])
 def join():
-    if request.method == "POST":
-        data = request.json
-        username = data.get('username')
-        join_message_string = username + " has joined the room"
-        socketio.emit('join_message', {'message': join_message_string})
-    return "hello"
+    data = request.json
+    username = data.get('username')
+    room = data.get('room')
+    join_message_string = f"{username} has joined the room {room}"
+    
+    join_room(room)
+    socketio.emit('join_message', {'message': join_message_string}, room=room)
+    return jsonify(success=True)
 
-
-@app.route("/leave", methods=["GET", "POST"])
+@app.route("/leave", methods=["POST"])
 def leave():
-    if request.method == "POST":
-        data = request.json
-        username = data.get('username')
-        leave_message_string = username + " has left the room"
-        print("\n\n\n")
-
-        print(leave_message_string)
-        socketio.emit('leave_message', {'message': leave_message_string})
-    return "hello"
-
+    data = request.json
+    username = data.get('username')
+    room = data.get('room')
+    leave_message_string = f"{username} has left the room {room}"
+    
+    leave_room(room)
+    socketio.emit('leave_message', {'message': leave_message_string}, room=room)
+    return jsonify(success=True)
 
 @app.route("/view-messages")
 def view_messages():
-    return jsonify(chat_history)
-
+    room = request.args.get('room')
+    return jsonify(chat_history.get(room, []))
 
 @socketio.on('connect')
 def handle_connect():
     global connected_clients
-    print('Client connected')
     connected_clients += 1
+    # Emitting to all clients, consider only updating specific admin or monitoring panels if necessary
     socketio.emit('user_count', {'count': connected_clients})
-    socketio.emit('connected_user')
-
 
 @socketio.on('disconnect')
 def handle_disconnect():
     global connected_clients
-    print('Client disconnected')
     connected_clients -= 1
+    # Emitting to all clients, consider only updating specific admin or monitoring panels if necessary
     socketio.emit('user_count', {'count': connected_clients})
-    socketio.emit('disconnected_user')
-
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
