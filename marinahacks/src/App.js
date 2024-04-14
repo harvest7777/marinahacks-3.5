@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import ChatRoom from './components/ChatRoom';
+import ColorSelector from './components/ColorSelector';
 import UserButton from './components/userbutton';
 import MessageBox from './components/sendmessage';
 import DisplayMessage from './components/displaymessages';
