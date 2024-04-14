@@ -10,6 +10,7 @@ connected_clients = 0
 
 
 @app.route("/")
+def
 def home():
     # JSON data returned from endpoint
     return {0: "no data to be seen here!"}
@@ -82,6 +83,8 @@ def handle_disconnect():
     connected_clients -= 1
     socketio.emit('user_count', {'count': connected_clients})
     socketio.emit('disconnected_user')
+
+###
 
 
 if __name__ == "__main__":
