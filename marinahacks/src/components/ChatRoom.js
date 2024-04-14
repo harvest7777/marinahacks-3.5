@@ -17,9 +17,9 @@ function ChatRoom() {
     </div>
     <div className="container">
       <Header title = "Chat Room A" num = "01" imgSrc = {ImageA}/> 
-      <Header title = "Chat Room B" num = "00" imgSrc = {ImageB}/> 
-      <Header title = "Chat Room C" num = "00" imgSrc = {ImageC}/> 
-      <Header title = "Chat Room D" num = "00" imgSrc = {ImageD}/> 
+      <Header title = "Chat Room B" num = "02" imgSrc = {ImageB}/> 
+      <Header title = "Chat Room C" num = "03" imgSrc = {ImageC}/> 
+      <Header title = "Chat Room D" num = "04" imgSrc = {ImageD}/> 
       {/*^^ This is for the Chatroom Box Container */}
     </div>
 
