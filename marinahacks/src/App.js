@@ -21,6 +21,7 @@ function App() {
       <DisplayMessage />
       <MessageBox />
       <MainUserSection />
+      <ChatRoom />
 
       {/* Router Setup (assuming you will use it later) */}
       <Router>
