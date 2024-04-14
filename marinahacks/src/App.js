@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Component imports
 import ChatRoom from './components/ChatRoom';
 import ColorSelector from './components/ColorSelector';
-import UserButton from './username/userbutton';
-import MessageBox from './sendmessage/sendmessage';
-import DisplayMessage from './displaymessages/displaymessages';
+import UserButton from './components/userbutton';
+import MessageBox from './components/sendmessage';
+import DisplayMessage from './components/displaymessages';
 import MainUserSection from './components/MainUserSection';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './assets/baskic8.css'
+
+// Styles
+import './assets/baskic8.css';
 import './App.css';
+
 function App() {
-  // This is just an example of how you would access an API endpoint
-  // DO NOT actually access them all in app, it should be accessed within a react component this is just an example
+  // State to store API data
   const [data, setData] = useState();
 
+  // Effect for fetching API data
   useEffect(() => {
+    // Reminder: Move this API call to a more appropriate component or use a context/provider if necessary
     fetch("/test")
       .then(res => res.json())
       .then(data => {
@@ -21,17 +27,21 @@ function App() {
         console.log(data);
       });
   }, []);
-  // DO NOT ACCESS API ENDPOINTS IN APP.JS THIS IS JUST AN EXAMPLE
-    
 
-function App() {
   return (
-    // We will be putting all our react components here
     <div>
+      {/* Components rendering */}
       <UserButton />
       <DisplayMessage />
       <MessageBox />
       <MainUserSection />
+
+      {/* Router Setup (assuming you will use it later) */}
+      <Router>
+        <Routes>
+          {/* Example Route: <Route path="/chat" element={<ChatRoom />} /> */}
+        </Routes>
+      </Router>
     </div>
   );
 }
