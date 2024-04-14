@@ -40,10 +40,10 @@ function DisplayMessage() {
             <h2>Online: {userCount}</h2>
             <ul>
                 {messages.map((message, index) => {
-                    message = message.split(': ')[1];
-                    if(!message){return;}
-                    if(message[4] == ':'){
-                        return <img style={{width:'50px'}} key={index} src={message}></img>;
+                    const newImage = message.split(': ')[1];
+                    if(!newImage){return;}
+                    if(newImage[4] == ':'){
+                        return <img style={{width:'50px'}} key={index} src={newImage}></img>;
                     }
                     return <li key={index}>{message}</li>;
                 })}

@@ -23,6 +23,7 @@ function App() {
         <Route exact path='/chat'>
           <DisplayMessage />
           <MessageBox />
+          <MainUserSection/>
         </Route>
         <Route exact path='/name'>
           <UserButton />
