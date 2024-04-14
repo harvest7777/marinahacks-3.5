@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from 'socket.io-client';
 
 function DisplayMessage() {
     const [messages, setMessages] = useState([]);
     const [userCount, setUserCount] = useState(0);
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         const socket = io('http://localhost:5000');
         socket.on('connect', () => {
             console.log('Connected to server');
         });
-
         socket.on('user_count', ({ count }) => {
             setUserCount(count);
         });
@@ -34,18 +34,26 @@ function DisplayMessage() {
         };
     }, []);
 
+    useEffect(() => {
+        const scroll = messagesEndRef.current;
+    if (scroll) {
+      scroll.scrollTop = scroll.scrollHeight;
+    }
+    })
+
     return (
         <div>
-            <h2>Messages</h2>
             <h2>Online: {userCount}</h2>
-            <ul>
+            <ul className="responses" ref={messagesEndRef}>
                 {messages.map((message, index) => {
                     const newImage = message.split(': ')[1];
+                    const newName = message.split(': ')[0].split(' - ')[1] //CHAT WHAT IS THIS :SOB:
                     if(!newImage){return;}
                     if(newImage[4] == ':'){
                         return (
-                            <div className="drawing-container responses">
-                                <img className='drawing-board' style={{width:'50px'}} key={index} src={newImage}></img>
+                            <div key={index} className="drawing-container">
+                                <p>{newName}</p>
+                                <img className='drawing-board' key={index} src={newImage}></img>
                             </div>
                         );
                     }

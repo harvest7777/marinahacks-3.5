@@ -1,9 +1,11 @@
 import React from 'react'
 
-function ColorBut({color}) {
+function ColorBut({color, handleBackgroundColor}) {
+
   return (
-    <div className = 'colours' style = {{background: color}}>
-    </div>
+    <button onClick={() => {localStorage.setItem('userColor', color)
+    handleBackgroundColor(color)}} className = 'colours' style = {{background: color}}>
+    </button>
   )
 }
 

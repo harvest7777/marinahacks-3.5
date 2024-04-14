@@ -25,7 +25,7 @@ function MainUserSection() {
     <>
     <div className = 'main-drawing-container'>
       <Tools tool={handleCurrentTool} brushSize={handleBrushChange} handleDoClear={handleDoClear} handleSetLastImage={handleSetLastImage}/>
-      <MainCard tool={currentTool} currentBrushSize={currentBrushSize} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} />
+      <MainCard tool={currentTool} currentBrushSize={currentBrushSize} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} color={localStorage.getItem('userColor')} />
     </div>
     </>
   )

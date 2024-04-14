@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import DrawingCanvas from './DrawingCanvas'
 
-function MainCard({tool, currentBrushSize, handleDoClear, doClear, doSetLastImage, handleSetLastImage}) {
+function MainCard({tool=1, currentBrushSize=5, handleDoClear=null, doClear=false, doSetLastImage=false, handleSetLastImage=null, color='#000000'}) {
     const [drawingData, setDrawingData] = useState(null);
     const [textData, setTextData] = useState('');
-    const [currentColor, setCurrentColor] = useState('#000000');
+    const [currentColor, setCurrentColor] = useState(color);
     
 
     const handleDrawingChange = (newDrawing) => {

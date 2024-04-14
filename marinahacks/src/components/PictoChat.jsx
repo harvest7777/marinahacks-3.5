@@ -3,6 +3,7 @@ import MainUserSection from './MainUserSection';
 import DisplayMessage from './displaymessages';
 
 function PictoChat() {
+  
   return (
     <section className='pictochat'>
         <DisplayMessage />

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import lastImage from '../assets/upload.png';
 
-function MessageBox() {
+function MessageBox({handleDoClear}) {
     const [currentTime, setCurrentTime] = useState(new Date());
 
     const sendMessage = () => {
@@ -9,17 +9,14 @@ function MessageBox() {
         const username = localStorage.getItem('username');
         const timestamp = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
         const room = 1
-        console.log(timestamp, "-", username, ":", message)
         fetch("/send-message", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                timestamp,
                 username,
                 message,
-                room,
             })
         })
     }
@@ -35,7 +32,8 @@ function MessageBox() {
 
     return (
         <div>
-            <input className = "tool" src={lastImage} type='image' onClick={sendMessage}></input>
+            <input className = "tool" src={lastImage} type='image' onClick={() => {sendMessage()
+                 handleDoClear(true)} }></input>
         </div>
     );
 }

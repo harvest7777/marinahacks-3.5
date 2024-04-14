@@ -12,7 +12,7 @@ function Tools({ tool, brushSize, handleDoClear, handleSetLastImage }) {
   return (
     <>
     <div className = "tool-container">
-    <MessageBox />
+    <MessageBox handleDoClear={handleDoClear}/>
     {/* <input className = "tool" src={lastImage} onClick={() => handleSetLastImage(true)} type='image' alt='clear card' /> */}
     <input className = "tool" src={eraser} onClick={() => tool(1)} type='image' alt='eraser' />
     <input className = "tool" src={pencil} onClick={() => tool(0)} type='image' alt='pencil' />

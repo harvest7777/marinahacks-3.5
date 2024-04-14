@@ -210,8 +210,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.1rem;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2rem;
+  height: 2rem;
   background: var(--secondary-color);
   border: 0.2rem solid var(--primary-color);
   border-radius: 0.4rem;
@@ -228,8 +228,8 @@ body {
   justify-content: center;
   background: gray;
   margin-right: 20rem;
-  width: 25.5rem;
-  height: 18.2rem;
+  width: 407.5px;
+  height: 240px;
   border: 0.2rem solid rgb(105, 105, 105);
   border-radius: 0.4rem;
   
@@ -254,9 +254,25 @@ body {
 }
 .pictochat{
   display:flex;
-  justify-content: center;
-  padding-left:15%;
+  flex-flow: column;
+  align-items: center;
+  padding-left:20%;
 }
 .responses{
   overflow-y:scroll;
+  height:375px;
+}
+.colours:hover{
+  transform: scale3d(110%, 110%, 110%);
+  filter:brightness(130%);
+}
+.tool:hover{
+  transform: scale3d(110%, 110%, 110%);
+  filter:brightness(110%);
+}
+.absolute{
+  position: absolute;
+}
+.relative{
+  position: relative;
 }

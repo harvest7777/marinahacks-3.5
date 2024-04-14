@@ -1,9 +1,12 @@
-import React from 'react'
-import Button from './InteractBut'
+import React, {useState} from 'react'
 import ColorBut from './ColorBut'
 
 const colors = ['#000000', '#9D9D9D', '#F9EFFF', '#BE2633', '#E06F8B', '#493C2B', '#A46422', '#EB8931', '#EB8931', '#796C9B', '#44891A', '#A3CE27', '#1B2632', '#005784', '#31A2F2', '#B2DCEF']; // Array of colors
 const ColorSelector = () => {
+  const [backgroundColor, setBackgroundColor] = useState('white');
+  const handleBackgroundColor = (backgroundColor) => {
+    setBackgroundColor(backgroundColor);
+  };
   return (
     <>
     <div className = "page-head">
@@ -15,14 +18,14 @@ const ColorSelector = () => {
         <div className = 'color-selection'>
             <div className = "colors">
                 {colors.map((color, index) => (
-                    <ColorBut key={index} color={color} /> // Pass color to each ColorBut
+                    <ColorBut key={index} color={color} handleBackgroundColor={handleBackgroundColor} /> // Pass color to each ColorBut
                 ))}
             </div>
         </div>
 
         <div className = 'favorite-selection'>
             <header>Choose Color</header>
-            <div className = 'choosen-color'></div>
+            <div className = 'choosen-color' style={{backgroundColor:backgroundColor}}></div>
 
         </div>
     </div>
