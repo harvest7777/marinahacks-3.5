@@ -12,7 +12,7 @@ function DisplayMessage() {
         socket.on('connect', () => {
             console.log('Connected to server');
         });
-       
+
         // Join a room
         const room = "room1"; // This should be dynamically set based on user input or other logic
         socket.emit('join_room', room);
