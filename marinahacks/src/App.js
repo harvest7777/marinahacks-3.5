@@ -22,37 +22,37 @@ function App() {
     // We will be putting all our react components here
     <Router>
       <Switch>
-        
+
         <Route exact path='/'>
           <UserButton />
         </Route>
 
         <Route exact path='/color'>
-         <ColorSelector/>
+          <ColorSelector />
         </Route>
 
         <Route exact path='/join'>
-             <ChatRoom />
+          <ChatRoom />
         </Route>
 
         <Route exact path='/chat'>
           <DisplayMessage />
           <MessageBox />
-          <MainUserSection/>
+          <MainUserSection />
         </Route>
         <Route path="/chatA" component={ChatRoomA}>
           <PictoChat />
         </Route>
         <Route path="/chatB" component={ChatRoomB}>
-        <PictoChat />
+          <PictoChat />
         </Route>
         <Route path="/chatC" component={ChatRoomC}>
-        <PictoChat />
+          <PictoChat />
         </Route>
         <Route path="/chatD" component={ChatRoomD}>
-        <PictoChat />
+          <PictoChat />
         </Route>
-        
+
       </Switch>
     </Router>
 
