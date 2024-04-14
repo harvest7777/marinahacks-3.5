@@ -1,32 +1,47 @@
 import React, { useState, useEffect } from "react";
+import io from 'socket.io-client';
 
 function DisplayMessage() {
     const [messages, setMessages] = useState([]);
+    const [userCount, setUserCount] = useState(0);
 
-    // Function to fetch messages from the API
-    const fetchMessages = async () => {
-        try {
-            const response = await fetch('/view-messages');
-            if (!response.ok) {
-                throw new Error('Failed to fetch messages');
-            }
-            const data = await response.json();
-            setMessages(data); // Set the fetched messages in state
-            console.log(messages);
-        } catch (error) {
-            console.error('Error fetching messages:', error);
-        }
-    };
     useEffect(() => {
-        // Fetch every 0.5s
-        const timerId = setInterval(fetchMessages, 500);
+        // Establish connectino w websocket
+        const socket = io('http://localhost:5000');
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
 
-        // Cleanup function to clear the interval when the component unmounts
-        return () => clearInterval(timerId);
+
+        socket.on('user_count', ({ count }) => {
+            setUserCount(count);
+        });
+
+        socket.on('new_message', ({ message }) => {
+            setMessages(prevMessages => [...prevMessages, message]);
+        });
+
+        socket.on('disconnected_user', () => {
+            const leave_message = "A user has left!"
+            setMessages(prevMessages => [...prevMessages, leave_message]);
+        })
+
+        socket.on('connected_user', () => {
+            const join_message = "A user has joined!"
+            setMessages(prevMessages => [...prevMessages, join_message]);
+        })
+
+        return () => {
+
+            socket.disconnect();
+        };
     }, []);
+
+
     return (
         <div>
             <h2>Messages</h2>
+            <h2>Online: {userCount}</h2>
             <ul>
                 {messages.map((message, index) => (
                     <li key={index}>{message}</li>
