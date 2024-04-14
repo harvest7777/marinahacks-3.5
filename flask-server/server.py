@@ -3,23 +3,25 @@ from flask_socketio import SocketIO, join_room, leave_room
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
-chat_history = {}  # Dictionary to store messages by room
-connected_clients = 0
+
+# Chat history organized by room
+chat_history = {}
 
 @app.route("/send-message", methods=["POST"])
 def send_message():
     data = request.json
     room = data.get('room')
+    timestamp = data.get('timestamp')
     username = data.get('username')
     message = data.get('message')
-    timestamp = data.get('timestamp')
     chat_message_string = f"{timestamp} - {username}: {message}"
     
-    # Storing message in room-specific history
+    # Append message to the room's history
     if room not in chat_history:
         chat_history[room] = []
     chat_history[room].append(chat_message_string)
     
+    # Emit message to only users in the room
     socketio.emit('new_message', {'message': chat_message_string}, room=room)
     return jsonify(success=True)
 
@@ -28,9 +30,10 @@ def join():
     data = request.json
     username = data.get('username')
     room = data.get('room')
-    join_message_string = f"{username} has joined the room {room}"
     
+    # Join the room
     join_room(room)
+    join_message_string = f"{username} has joined the room {room}"
     socketio.emit('join_message', {'message': join_message_string}, room=room)
     return jsonify(success=True)
 
@@ -39,9 +42,10 @@ def leave():
     data = request.json
     username = data.get('username')
     room = data.get('room')
-    leave_message_string = f"{username} has left the room {room}"
     
+    # Leave the room
     leave_room(room)
+    leave_message_string = f"{username} has left the room {room}"
     socketio.emit('leave_message', {'message': leave_message_string}, room=room)
     return jsonify(success=True)
 
@@ -52,17 +56,14 @@ def view_messages():
 
 @socketio.on('connect')
 def handle_connect():
-    global connected_clients
-    connected_clients += 1
-    # Emitting to all clients, consider only updating specific admin or monitoring panels if necessary
-    socketio.emit('user_count', {'count': connected_clients})
+    print('Client connected')
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    global connected_clients
-    connected_clients -= 1
-    # Emitting to all clients, consider only updating specific admin or monitoring panels if necessary
-    socketio.emit('user_count', {'count': connected_clients})
+    print('Client disconnected')
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
+#Chat History as Dictionary: Messages are stored in a dictionary where each key is a room identifier.
+#Room Handling: Users join and leave rooms with join_room() and leave_room() from Flask-SocketIO.
+#Room Specific Messaging: Messages are sent to specific rooms, ensuring that they are only seen by users in that room.
