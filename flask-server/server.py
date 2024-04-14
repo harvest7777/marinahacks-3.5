@@ -56,8 +56,6 @@ def leave():
         data = request.json
         username = data.get('username')
         leave_message_string = username + " has left the room"
-        print("\n\n\n")
-
         print(leave_message_string)
         socketio.emit('leave_message', {'message': leave_message_string})
     return "hello"
