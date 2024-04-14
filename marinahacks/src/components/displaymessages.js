@@ -43,7 +43,11 @@ function DisplayMessage() {
                     const newImage = message.split(': ')[1];
                     if(!newImage){return;}
                     if(newImage[4] == ':'){
-                        return <img style={{width:'50px'}} key={index} src={newImage}></img>;
+                        return (
+                            <div className="drawing-container responses">
+                                <img className='drawing-board' style={{width:'50px'}} key={index} src={newImage}></img>
+                            </div>
+                        );
                     }
                     return <li key={index}>{message}</li>;
                 })}

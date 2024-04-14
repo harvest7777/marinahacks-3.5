@@ -64,7 +64,7 @@ function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool, 
     
   return (
     // <canvas className = "drawing-board" style={{border:'solid black 0.3rem'}}ref={canvasRef} width={500} height={250}/>
-    <canvas className = "drawing-board" ref={canvasRef}/>
+    <canvas className = "drawing-board" ref={canvasRef} width={500} height={250}/>
   )
 }
 

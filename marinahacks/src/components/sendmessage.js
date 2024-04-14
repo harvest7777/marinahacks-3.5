@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import lastImage from '../assets/upload.png';
 
 function MessageBox() {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -35,7 +35,7 @@ function MessageBox() {
 
     return (
         <div>
-            <button onClick={sendMessage}>Send!</button>
+            <input className = "tool" src={lastImage} type='image' onClick={sendMessage}></input>
         </div>
     );
 }
