@@ -1,49 +1,69 @@
 from flask import Flask, request, jsonify
+from flask_socketio import SocketIO, join_room, leave_room
 
-# This initializes your sql app. This class is used to send sql queries to the databse
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
-chat_history = []
+# Chat history organized by room
+chat_history = {}
 
-# This is the default api endpoint (https://localhost/)
-
-
-@app.route("/")
-def home():
-    # JSON data returned from endpoint
-    return {0: "no data to be seen here!"}
-
-
-# This is the testing endpoint to make sure the sql queries are being sent (https://localhost/test)
-@app.route("/test")
-def test():
-    return {1: "hello world"}
-
-
-@app.route("/submit-username", methods=["GET", "POST"])
-def submit_username():
-    return "This is supposed to be used through a react component to submit a username"
-
-
-@app.route("/send-message", methods=["GET", "POST"])
+@app.route("/send-message", methods=["POST"])
 def send_message():
-    if request.method == "POST":
-        data = request.json
-        timestamp = data.get('timestamp')
-        username = data.get('username')
-        message = data.get('message')
-        chat_message_string = f"{timestamp} - {username}: {message}"
-        chat_history.append(chat_message_string)
-        print("Post request received, added " +
-              chat_message_string + " to logs!")
+    data = request.json
+    room = data.get('room')
+    timestamp = data.get('timestamp')
+    username = data.get('username')
+    message = data.get('message')
+    chat_message_string = f"{timestamp} - {username}: {message}"
+    
+    # Append message to the room's history
+    if room not in chat_history:
+        chat_history[room] = []
+    chat_history[room].append(chat_message_string)
+    
+    # Emit message to only users in the room
+    socketio.emit('new_message', {'message': chat_message_string}, room=room)
+    return jsonify(success=True)
 
-    return "This is supposed to be used through a react component to submit a username"
+@app.route("/join", methods=["POST"])
+def join():
+    data = request.json
+    username = data.get('username')
+    room = data.get('room')
+    
+    # Join the room
+    join_room(room)
+    join_message_string = f"{username} has joined the room {room}"
+    socketio.emit('join_message', {'message': join_message_string}, room=room)
+    return jsonify(success=True)
 
+@app.route("/leave", methods=["POST"])
+def leave():
+    data = request.json
+    username = data.get('username')
+    room = data.get('room')
+    
+    # Leave the room
+    leave_room(room)
+    leave_message_string = f"{username} has left the room {room}"
+    socketio.emit('leave_message', {'message': leave_message_string}, room=room)
+    return jsonify(success=True)
 
 @app.route("/view-messages")
 def view_messages():
-    return jsonify(chat_history)
+    room = request.args.get('room')
+    return jsonify(chat_history.get(room, []))
 
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, debug=True)
+#Chat History as Dictionary: Messages are stored in a dictionary where each key is a room identifier.
+#Room Handling: Users join and leave rooms with join_room() and leave_room() from Flask-SocketIO.
+#Room Specific Messaging: Messages are sent to specific rooms, ensuring that they are only seen by users in that room.
