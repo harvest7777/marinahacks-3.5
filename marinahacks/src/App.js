@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
+import ChatRoom from './components/ChatRoom';
 import UserButton from './components/userbutton';
 import MessageBox from './components/sendmessage';
 import DisplayMessage from './components/displaymessages';
@@ -11,6 +12,7 @@ function App() {
       <UserButton />
       <DisplayMessage />
       <MessageBox />
+      <ChatRoom/>
     </div>
   );
 }

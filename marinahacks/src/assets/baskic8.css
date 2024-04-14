@@ -1,7 +1,8 @@
-@font-face {
+/* @font-face {
     font-family: 'Baskic';
     src: local('Baskic'), 
+    url('./Baskic8.woff') format('woff'),
          url('./Baskic8.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-}
+} */
