@@ -64,3 +64,6 @@ def handle_disconnect():
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
+#Chat History as Dictionary: Messages are stored in a dictionary where each key is a room identifier.
+#Room Handling: Users join and leave rooms with join_room() and leave_room() from Flask-SocketIO.
+#Room Specific Messaging: Messages are sent to specific rooms, ensuring that they are only seen by users in that room.
