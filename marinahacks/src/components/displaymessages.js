@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
 
+
 function DisplayMessage() {
     const [messages, setMessages] = useState([]);
     const [userCount, setUserCount] = useState(0);
@@ -11,7 +12,14 @@ function DisplayMessage() {
         socket.on('connect', () => {
             console.log('Connected to server');
         });
+       
+        // Join a room
+        const room = "room1"; // This should be dynamically set based on user input or other logic
+        socket.emit('join_room', room);
 
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
 
         socket.on('user_count', ({ count }) => {
             setUserCount(count);

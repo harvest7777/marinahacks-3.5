@@ -12,6 +12,7 @@ function MessageBox() {
 
     const sendMessage = () => {
         const username = localStorage.getItem('username');
+        const room = localStorage.getItem('room'); // Assuming the room is stored in localStorage
         const timestamp = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
         console.log(timestamp, "-", username, ":", message)
         fetch("/send-message", {
@@ -23,6 +24,7 @@ function MessageBox() {
                 timestamp,
                 username,
                 message,
+                room, //room!
             })
         })
     }
