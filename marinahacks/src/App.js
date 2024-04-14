@@ -13,7 +13,7 @@ function App() {
       <UserButton />
       <DisplayMessage />
       <MessageBox />
-      <ColorSelectors/>
+      <ColorSelector/>
       <ChatRoom/>
     </div>
   );
