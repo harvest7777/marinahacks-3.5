@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
 
-function DisplayMessage({ room }) {  // room is now a prop
+function DisplayMessage() {
     const [messages, setMessages] = useState([]);
     const [userCount, setUserCount] = useState(0);
 
     useEffect(() => {
+        // Establish connectino w websocket
         const socket = io('http://localhost:5000');
-
-        // Log connection and join the room
         socket.on('connect', () => {
             console.log('Connected to server');
-            socket.emit('join_room', room);  // Join the room on connection
         });
 
-        // Handlers for various socket events
+
         socket.on('user_count', ({ count }) => {
             setUserCount(count);
         });
@@ -23,19 +21,22 @@ function DisplayMessage({ room }) {  // room is now a prop
             setMessages(prevMessages => [...prevMessages, message]);
         });
 
-        socket.on('disconnected_user', ({ message }) => {  // Assume message is passed
-            setMessages(prevMessages => [...prevMessages, message]);
-        });
+        socket.on('disconnected_user', () => {
+            const leave_message = "A user has left!"
+            setMessages(prevMessages => [...prevMessages, leave_message]);
+        })
 
-        socket.on('connected_user', ({ message }) => {  // Assume message is passed
-            setMessages(prevMessages => [...prevMessages, message]);
-        });
+        socket.on('connected_user', () => {
+            const join_message = "A user has joined!"
+            setMessages(prevMessages => [...prevMessages, join_message]);
+        })
 
-        // Cleanup function to disconnect socket on unmount
         return () => {
+
             socket.disconnect();
         };
-    }, [room]);  // Dependency array includes room to reconnect if it changes
+    }, []);
+
 
     return (
         <div>
@@ -51,7 +52,3 @@ function DisplayMessage({ room }) {  // room is now a prop
 }
 
 export default DisplayMessage;
-//Dynamic Room Support: The room is now passed as a prop to DisplayMessage, making it more flexible.
-//Proper Connection Management: The connection and room joining logic are combined under a single connect event handler.
-//Event Handling: Updated to assume that messages indicating a user has connected or disconnected are passed with the event, allowing for more informative messages.
-//Cleanup and Error Handling: The cleanup function ensures the socket is properly disconnected to prevent memory leaks.

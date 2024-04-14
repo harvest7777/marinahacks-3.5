@@ -14,20 +14,6 @@ import './assets/baskic8.css';
 import './App.css';
 
 function App() {
-  // State to store API data
-  const [data, setData] = useState();
-
-  // Effect for fetching API data
-  useEffect(() => {
-    // Reminder: Move this API call to a more appropriate component or use a context/provider if necessary
-    fetch("/test")
-      .then(res => res.json())
-      .then(data => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
-
   return (
     <div>
       {/* Components rendering */}

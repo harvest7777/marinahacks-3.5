@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 function MessageBox() {
     const [textInput, setTextInput] = useState('');
+    const [message, setMessage] = useState('');
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     const handleInputChange = (event) => {
         setTextInput(event.target.value);
@@ -9,11 +12,9 @@ function MessageBox() {
 
     const sendMessage = () => {
         const username = localStorage.getItem('username');
-        const room = localStorage.getItem('room'); // Ensure room is correctly managed in localStorage
-        const currentTime = new Date(); // Moved here to capture exact send time
         const timestamp = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
-        console.log(timestamp, "-", username, ":", textInput); // Logging for debug
-
+        const room = 1
+        console.log(timestamp, "-", username, ":", message)
         fetch("/send-message", {
             method: "POST",
             headers: {
@@ -22,15 +23,24 @@ function MessageBox() {
             body: JSON.stringify({
                 timestamp,
                 username,
-                message: textInput,
+                message,
                 room,
             })
-        }).then(() => {
-            setTextInput(''); // Clear the input field after sending
-        }).catch(err => {
-            console.error('Failed to send message:', err);
-        });
+        })
     }
+
+    useEffect(() => {
+        setMessage(textInput);
+    }, [textInput]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000); // Update every 1000 milliseconds (1 second)
+
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(intervalId);
+    }, []);
 
     return (
         <div>
@@ -42,12 +52,10 @@ function MessageBox() {
                 placeholder="Enter your message here"
             />
             <button onClick={sendMessage}>Send!</button>
-            <p>Your message: {textInput}</p> {/* Changed from message to textInput to reflect live input */}
+            <p>Your message: {message}</p>
         </div>
     );
 }
 
+
 export default MessageBox;
-//Direct State Update: The textInput state is directly updated via handleInputChange which then gets used as the message to send.
-//Immediate Timestamp: Timestamp generation happens immediately before sending to ensure accuracy.
-//Input Clearing: The input field is cleared once the message is successfully sent.
