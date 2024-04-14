@@ -22,8 +22,10 @@ function MainCard({tool, currentBrushSize, handleDoClear, doClear, doSetLastImag
     
   return (
     <>
-    <p>{localStorage.getItem('username')}</p>
-    <DrawingCanvas onChange={handleDrawingChange} currentBrushSize={currentBrushSize} currentColor={currentColor}  currentTool={tool} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} />
+      <div className = 'drawing-container'>
+        <p>{localStorage.getItem('username')}</p>
+        <DrawingCanvas onChange={handleDrawingChange} currentBrushSize={currentBrushSize} currentColor={currentColor}  currentTool={tool} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} />
+      </div>
     </>
   )
 }

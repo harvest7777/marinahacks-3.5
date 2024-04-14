@@ -11,14 +11,17 @@ import lastImage from '../assets/upload.png';
 function Tools({ tool, brushSize, handleDoClear, handleSetLastImage }) {
   return (
     <>
-      <input src={eraser} onClick={() => tool(1)} type='image' alt='eraser' />
-      <input src={pencil} onClick={() => tool(0)} type='image' alt='pencil' />
-      <input src={brushLarge} onClick={() => brushSize(12)} type='image' alt='big brush' />
-      <input src={brushMedium} onClick={() => brushSize(5)} type='image' alt='medium brush' />
-      <input src={brushSmall} onClick={() => brushSize(1)} type='image' alt='small brush' />
-      <input src={clearCard} onClick={() => handleDoClear(true)} type='image' alt='clear card' />
-      <input src={lastImage} onClick={() => handleSetLastImage(true)} type='image' alt='clear card' />
+    <div className = "tool-container">
+    <input className = "tool" src={lastImage} onClick={() => handleSetLastImage(true)} type='image' alt='clear card' />
+      <input className = "tool" src={eraser} onClick={() => tool(1)} type='image' alt='eraser' />
+      <input className = "tool" src={pencil} onClick={() => tool(0)} type='image' alt='pencil' />
+      <input className = "tool" src={brushLarge} onClick={() => brushSize(12)} type='image' alt='big brush' />
+      <input className = "tool" src={brushMedium} onClick={() => brushSize(5)} type='image' alt='medium brush' />
+      <input className = "tool" src={brushSmall} onClick={() => brushSize(1)} type='image' alt='small brush' />
+      <input className = "tool" src={clearCard} onClick={() => handleDoClear(true)} type='image' alt='clear card' />
+    </div>
     </>
+
   )
 }
 
