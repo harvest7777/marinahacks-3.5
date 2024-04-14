@@ -23,8 +23,10 @@ function MainUserSection() {
   }
   return (
     <>
-    <Tools tool={handleCurrentTool} brushSize={handleBrushChange} handleDoClear={handleDoClear} handleSetLastImage={handleSetLastImage}/>
-    <MainCard tool={currentTool} currentBrushSize={currentBrushSize} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} />
+    <div className = 'main-drawing-container'>
+      <Tools tool={handleCurrentTool} brushSize={handleBrushChange} handleDoClear={handleDoClear} handleSetLastImage={handleSetLastImage}/>
+      <MainCard tool={currentTool} currentBrushSize={currentBrushSize} handleDoClear={handleDoClear} doClear={doClear} doSetLastImage={doSetLastImage} handleSetLastImage={handleSetLastImage} />
+    </div>
     </>
   )
 }
