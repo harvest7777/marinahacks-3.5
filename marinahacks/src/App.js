@@ -7,6 +7,10 @@ import UserButton from './components/userbutton';
 import MessageBox from './components/sendmessage';
 import DisplayMessage from './components/displaymessages';
 import MainUserSection from './components/MainUserSection';
+import ChatRoomA from './components/chatRooms/ChatRoomA';
+import ChatRoomB from './components/chatRooms/ChatRoomB';
+import ChatRoomC from './components/chatRooms/ChatRoomC';
+import ChatRoomD from './components/chatRooms/ChatRoomD';
 
 import './assets/baskic8.css'
 
@@ -31,6 +35,26 @@ function App() {
         </Route>
 
         <Route exact path='/chat'>
+          <DisplayMessage />
+          <MessageBox />
+          <MainUserSection/>
+        </Route>
+        <Route path="/chatA" component={ChatRoomA}>
+          <DisplayMessage />
+          <MessageBox />
+          <MainUserSection/>
+        </Route>
+        <Route path="/chatB" component={ChatRoomB}>
+          <DisplayMessage />
+          <MessageBox />
+          <MainUserSection/>
+        </Route>
+        <Route path="/chatC" component={ChatRoomC}>
+          <DisplayMessage />
+          <MessageBox />
+          <MainUserSection/>
+        </Route>
+        <Route path="/chatD" component={ChatRoomD}>
           <DisplayMessage />
           <MessageBox />
           <MainUserSection/>

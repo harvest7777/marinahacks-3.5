@@ -101,6 +101,7 @@ body {
   justify-content: center;
   font-size: 3rem;
   color: var(--secondary-color);
+  
 }
 .join-goback{
   display: flex;
@@ -196,4 +197,15 @@ body {
   height: 4.2rem;
   border: 0.3rem solid var(--primary-color);
   border-radius: 0.5rem;
+}
+
+
+.chatroom-container-in{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12.8rem;
+  height: 3.8rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
 }
