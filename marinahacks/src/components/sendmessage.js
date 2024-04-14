@@ -2,18 +2,13 @@ import { useState, useEffect } from "react";
 
 
 function MessageBox() {
-    const [textInput, setTextInput] = useState('');
-    const [message, setMessage] = useState('');
     const [currentTime, setCurrentTime] = useState(new Date());
 
-    const handleInputChange = (event) => {
-        setTextInput(event.target.value);
-    };
-
     const sendMessage = () => {
+        const message = localStorage.getItem('drawingData');
         const username = localStorage.getItem('username');
-        const room = localStorage.getItem('room'); // Assuming the room is stored in localStorage
         const timestamp = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
+        const room = 1
         console.log(timestamp, "-", username, ":", message)
         fetch("/send-message", {
             method: "POST",
@@ -24,14 +19,10 @@ function MessageBox() {
                 timestamp,
                 username,
                 message,
-                room, //room!
+                room,
             })
         })
     }
-
-    useEffect(() => {
-        setMessage(textInput);
-    }, [textInput]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -44,15 +35,7 @@ function MessageBox() {
 
     return (
         <div>
-            <input
-                type="text"
-                maxLength={500}
-                value={textInput}
-                onChange={handleInputChange}
-                placeholder="Enter your message here"
-            />
             <button onClick={sendMessage}>Send!</button>
-            <p>Your message: {message}</p>
         </div>
     );
 }

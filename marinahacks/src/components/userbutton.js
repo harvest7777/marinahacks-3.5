@@ -38,7 +38,10 @@ function UserButton() {
                 placeholder="Enter text here"
             />
             <button onClick={saveUsername}>Save!</button>
-            <p>Your username: {username}</p>
+            <a href="/chat">
+                <button onClick={saveUsername}>Go to chat!</button>
+            </a>
+
         </div>
     );
 }
