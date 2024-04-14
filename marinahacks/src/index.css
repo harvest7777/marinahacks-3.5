@@ -197,3 +197,61 @@ body {
   border: 0.3rem solid var(--primary-color);
   border-radius: 0.5rem;
 }
+/* This is for painting message  */
+.tool-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: 0.1rem;
+}
+.tool{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  background: var(--secondary-color);
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 0.4rem;
+}
+.drawing-board{
+  /* background-color: var(--secondary-color); */
+  background-image: repeating-linear-gradient(white, white 2.4rem, var(--primary-color), var(--primary-color) 0.001rem, white, white 3rem);
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 0.4rem;
+  height: 15.5rem;
+  width: 25rem;
+  
+}
+.drawing-container{
+  align-items: center;
+  justify-content: center;
+  background: gray;
+  margin-right: 20rem;
+  width: 25.5rem;
+  height: 18.2rem;
+  border: 0.2rem solid rgb(105, 105, 105);
+  border-radius: 0.4rem;
+  
+}
+.drawing-container p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 0.4rem;
+  width: 10rem;
+  height: 2rem;
+  margin-bottom: 0.1rem;
+}
+.main-drawing-container{
+  display: flex;
+  margin: 0.3rem;
+  gap: 0.2rem;
+
+}
