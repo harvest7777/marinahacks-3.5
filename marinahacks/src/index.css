@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --foot-head-color: rgb(121, 108, 155);
+  --head-color: linear-gradient(to top, var(--foot-head-color), white);
+  --foot-color: linear-gradient(to bottom, var(--foot-head-color), white);
+  --primary-color: #45283c;
+  --secondary-color: white; 
+  --text-color: #45283c;
+}
+body {
+  background-color: rgb(150, 150, 150);
+}
+/* This is Design for the Interface of the chats */
+.container{
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin: 0.3rem;
+}
+.headerContainer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 35rem;
+  margin: 0.2rem auto;
+  border: 0.3rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  background-color: var(--secondary-color);
+}
+.textContainer{
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+.userContainer{
+  width: 6.2rem;
+  height: 3rem;
+  margin-left: 1.5rem;
+  margin-right: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  gap: 00.5rem;
+  border: 0.3rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--primary-color);
+}
+.img{
+  align-items: center;
+  width: 6rem;
+  height: 6rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-left: 0.3rem;
+  margin-right: 2.5rem;
+  padding: 0.2rem;
+  border: 0.3rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+  image-rendering: -moz-crisp-edges;          /* Firefox                        */
+  image-rendering: -o-crisp-edges;            /* Opera                          */
+  image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+  image-rendering: pixelated;                 /* Universal support since 2021   */
+  image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+.userLogo{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/*Below is For Buttons */
+.btn-container-out{
+  display: flex;
+  width: 14rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border: 0.3rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  background-color: transparent;
+}
+.btn-container-in{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12.8rem;
+  height: 3.8rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+}
+.btn-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--secondary-color);
+}
+.join-goback{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+/* This is for the foot and header */
+.page-head{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6rem;
+  background: var(--head-color);
+  border-bottom: 0.3rem solid black;
+}
+.page-foot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6rem;
+  background: var(--foot-color);
+  border-top: 0.3rem solid black;
+}
+/* This is to fix the alignment of the font */
+.userContainer h2, .page-head h1, .textContainer h1, .btn-container-in h1{
+  margin-top: 0.5rem;
+}
+
