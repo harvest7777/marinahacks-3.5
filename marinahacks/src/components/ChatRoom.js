@@ -35,7 +35,7 @@ function ChatRoom() {
       <div className="page-head">
         <h1>Choose a Chat Room to join.</h1>
       </div>
-  <div className="container">
+      <div className="container">
         <div onClick={() => handleRoomSelect('A')}>
           <Header title="Chat Room A" num="01" imgSrc={ImageA} />
         </div>
@@ -55,17 +55,19 @@ function ChatRoom() {
           {/* Assuming the Button component can take an onClick prop */}
 
           <div className="btn-container-out">
-        <a href="/color" className="btn-container-in">
-          <h1 className="btn-text">Back</h1>
-        </a>
-       </div>
+            <a href="/color" className="btn-container-in">
+              <h1 className="btn-text">Back</h1>
+            </a>
+          </div>
 
-  
-       <div className="btn-container-out">
-  <button className="btn-container-in" onClick={handleJoin}>Join</button>
-</div>
 
-       
+          <div className="btn-container-out">
+            <a href={`/chat${selectedRoom}`} className="btn-container-in" onClick={handleJoin}>
+              <h1 className="btn-text">Join</h1>
+            </a>
+          </div>
+
+
         </div>
       </div>
     </>
