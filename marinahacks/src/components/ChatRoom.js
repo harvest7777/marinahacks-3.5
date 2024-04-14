@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import index from '../index.css';
 import Header from './Header';
 import Button from './InteractBut';
 import ImageA from './final_straw.png';
 import ImageB from './cream.png';
 import ImageC from './cross.png';
 import ImageD from './donut.png';
-import index from '../index.css'
 
 function ChatRoom() {
   const count = 1; // Ignore this
 
+  const [selectedRoom, setSelectedRoom] = useState(null);
+
+  const handleRoomSelect = (room) => {
+    setSelectedRoom(room);
+    // Here you can add confirmation logic if needed
+  }
+
+  const handleJoin = () => {
+    if (selectedRoom) {
+      // Redirect to the chatroom page, replace "#" with your actual routing logic or path
+      window.location.href = `/#${selectedRoom}`;
+    } else {
+      alert('Please select a chat room first!');
+    }
+  }
 
   return (
     <>
@@ -25,8 +40,9 @@ function ChatRoom() {
 
       <div className="page-foot">
         <div className="join-goback">
-          <Button text="Back" />
-          <Button text="Join" />
+          {/* Assuming the Button component can take an onClick prop */}
+          <Button text="Back" onClick={() => { /* Add your back logic here */ }} />
+          <Button text="Join" onClick={handleJoin} />
         </div>
       </div>
     </>

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
+// Component imports
 import ChatRoom from './components/ChatRoom';
 import ColorSelector from './components/ColorSelector';
 import UserButton from './components/userbutton';
 import MessageBox from './components/sendmessage';
 import DisplayMessage from './components/displaymessages';
 import MainUserSection from './components/MainUserSection';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './assets/baskic8.css'
+
 import './App.css';
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+
   );
 }
 
