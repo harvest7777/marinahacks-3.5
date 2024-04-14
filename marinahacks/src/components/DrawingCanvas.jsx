@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
-function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool }) {
+function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool, doClear, handleDoClear }) {
     const canvasRef = useRef(null)
     const [canDraw, setDrawState] = useState(false);
 
@@ -14,9 +14,14 @@ function DrawingCanvas({ onChange, currentColor, currentBrushSize, currentTool }
             context.strokeStyle = 'rgba(0,0,0,1)'
             context.globalCompositeOperation = 'destination-out';;
         }
+
+        if(doClear){
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          handleDoClear(false)
+        }
         
         context.lineWidth = currentBrushSize;
-
+        
         const startDrawing = (event) => {
             context.beginPath();
             context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
